@@ -43,12 +43,29 @@ def update(car: dict, throttle_perc: float, mass: float = 1000, max_throttle_for
 def calculate_desired_acceleration(car: dict, K_P: float, K_I: float = 0.0, K_D: float = 0.0) -> tuple[float, float]:
         #input: car["v"], car["desired_v"] (floats)
         #output: desired acceleration and error tuple(float, float)
-        pass # delete this line and write your PID code here
 
+        error = car["desired_v"] - car["v"]
+        car["net_integral"] += error * car["dt"]
+        if car["error_prev"] is None:
+               derivative = 0.0
+        else:
+               derivative = (error - car["error_prev"]) / car["dt"]
+
+        car["error_prev"] = error
+
+        desired_acceleration = (K_P * error + K_I * car["net_integral"] + K_D * derivative)
+
+        return desired_acceleration, error
 
 
 
 def acceleration_to_throttle_percentage(acceleration_desired: float, mass: float = 1000, max_throttle_force: float = 5000) -> float:
         #input: desired_acceleration(float)
         #output: throttle percentage (float, -1 to 1)
-        pass # delete this line and write your code to convert desired acceleration to throttle here
+
+        max_acceleration = max_throttle_force / mass
+        throttle_percentage = acceleration_desired / max_acceleration
+
+        throttle_percentage = np.clip(throttle_percentage, -1, 1)
+        return throttle_percentage
+
