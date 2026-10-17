@@ -1,8 +1,8 @@
 import matplotlib.pyplot as plt
-from pid_template import make_car
-from pid_template import update
-from pid_template import calculate_desired_acceleration
-from pid_template import acceleration_to_throttle_percentage
+from complete_control import make_car
+from complete_control import update
+from complete_control import calculate_desired_acceleration
+from complete_control import acceleration_to_throttle_percentage
 
 K_P = 0.6
 K_I = 0.1

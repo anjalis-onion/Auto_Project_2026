@@ -69,3 +69,9 @@ def acceleration_to_throttle_percentage(acceleration_desired: float, mass: float
         throttle_percentage = np.clip(throttle_percentage, -1, 1)
         return throttle_percentage
 
+""" to make lateral controller add: 
+path function
+calculate cross track function (perpendicular distance from center of front axel to path)
+steering pid thing (similar to velocity pid?)
+then update the position of the car
+"""

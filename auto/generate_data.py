@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import matplotlib.pyplot as plt
 
-from pid_template import (
+from complete_control import (
     make_car,
     update,
     calculate_desired_acceleration,
